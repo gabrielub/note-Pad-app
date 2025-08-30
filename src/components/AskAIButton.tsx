@@ -101,7 +101,7 @@ function AskAIButton({ user }: Props) {
         <DialogHeader>
           <DialogTitle>Ask AI About Your Notes</DialogTitle>
           <DialogDescription>
-            Out AI can answer questions about all of your notes
+            This AI might answer questions about all of your notes.
           </DialogDescription>
         </DialogHeader>
 

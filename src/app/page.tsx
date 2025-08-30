@@ -4,6 +4,9 @@ import NewNoteButton from "@/components/NewNoteButton";
 import NoteTextInput from "@/components/NoteTextInput";
 import HomeToast from "@/components/HomeToast";
 import { prisma } from "@/db/prisma";
+import VoiceNote from "@/components/VoiceNote";
+import ShareNoteButton from "@/components/ShareNoteButton";
+
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -26,7 +29,10 @@ async function HomePage({ searchParams }: Props) {
       <div className="flex w-full max-w-4xl justify-end gap-2">
         <AskAIButton user={user} />
         <NewNoteButton user={user} />
-      </div>
+        <VoiceNote />
+        <ShareNoteButton noteId={noteId} />
+          </div>
+
 
       <NoteTextInput noteId={noteId} startingNoteText={note?.text || ""} />
 

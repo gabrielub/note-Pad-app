@@ -8,7 +8,14 @@ import { getUser } from "@/auth/server";
 import { SidebarTrigger } from "./ui/sidebar";
 
 async function Header() {
-  const user = await getUser();
+  let user = null;
+
+  try {
+    user = await getUser();
+  } catch (err) {
+    console.error("Failed to get user:", err);
+    user = null; // fallback to avoid crash
+  }
 
   return (
     <header
@@ -30,7 +37,7 @@ async function Header() {
         />
 
         <h1 className="flex flex-col pb-1 text-2xl font-semibold leading-6">
-          GOAT <span>Notes</span>
+          Note App <span>Project</span>
         </h1>
       </Link>
 

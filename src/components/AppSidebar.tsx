@@ -1,30 +1,22 @@
-import { getUser } from "@/auth/server";
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
 } from "@/components/ui/sidebar";
-import { prisma } from "@/db/prisma";
-import { Note } from "@prisma/client";
 import Link from "next/link";
 import SidebarGroupContent from "./SidebarGroupContent";
+import useNote from "@/hooks/useNote";
 
-async function AppSidebar() {
-  const user = await getUser();
+export default function AppSidebar() {
+  const { noteText } = useNote();
 
-  let notes: Note[] = [];
+  // Local-only "notes" array
+  const notes = noteText ? [{ id: "local-note", text: noteText }] : [];
 
-  if (user) {
-    notes = await prisma.note.findMany({
-      where: {
-        authorId: user.id,
-      },
-      orderBy: {
-        updatedAt: "desc",
-      },
-    });
-  }
+  const user = true; // Optional: mock user for UI consistency
 
   return (
     <Sidebar>
@@ -48,5 +40,3 @@ async function AppSidebar() {
     </Sidebar>
   );
 }
-
-export default AppSidebar;
